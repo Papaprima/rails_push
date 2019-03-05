@@ -25,7 +25,8 @@ namespace :testovoe do
       product = Product.find_by url: url
       product = Product.create(name: name, url: url, price: price, status: status) if !product
 
-      product.connections.create(category: category, product: product)
+      connection = Connection.where(category_id: category.id, product_id: product.id)
+      product.connections.create(category: category, product: product) if !connection
     end
   end
 
